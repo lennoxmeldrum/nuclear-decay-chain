@@ -1,0 +1,5 @@
+{
+  "name": "Nuclear Decay Visualizer",
+  "description": "An interactive educational app for high school physics students to explore and predict nuclear decay chains (Alpha and Beta decay) with detailed visualizations.",
+  "requestFramePermissions": []
+}
