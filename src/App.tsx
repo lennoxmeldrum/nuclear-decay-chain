@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { DECAY_CHAINS } from './lib/decayData';
 import { DecayChart } from './components/DecayChart';
 import { LearningPanel } from './components/LearningPanel';
-import { Atom } from 'lucide-react';
+import { PeriodicTable } from './components/PeriodicTable';
+import { Atom, TableProperties } from 'lucide-react';
 
 export default function App() {
   const [selectedChainId, setSelectedChainId] = useState<string>(DECAY_CHAINS[0].id);
   const [revealedSteps, setRevealedSteps] = useState<number>(0);
+  const [showPeriodicTable, setShowPeriodicTable] = useState(false);
 
   const currentChain = DECAY_CHAINS.find(c => c.id === selectedChainId) || DECAY_CHAINS[0];
 
@@ -57,11 +59,20 @@ export default function App() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-6">
+        <div className="mb-6 flex items-start justify-between gap-4">
           <p className="text-slate-400 max-w-3xl">
             {currentChain.description} Follow the chain by predicting the next isotope based on the type of decay.
           </p>
+          <button
+            onClick={() => setShowPeriodicTable(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 hover:text-white hover:border-indigo-500 transition-colors text-sm font-medium whitespace-nowrap shrink-0"
+          >
+            <TableProperties size={16} />
+            Periodic Table
+          </button>
         </div>
+
+        {showPeriodicTable && <PeriodicTable onClose={() => setShowPeriodicTable(false)} />}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-[700px]">
           {/* Left Column: Visualizer */}
